@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Switch } from "react-router";
 import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { ChannelList } from "./component/index";
+import { Channel } from "./Channel";
 import { Container } from "semantic-ui-react";
 
 const routes = (
@@ -15,7 +16,7 @@ const routes = (
             <Route
               exact={true}
               path="/channels/:channelName"
-              render={props => <h2>{props.match.params.channelName}</h2>}
+              component={Channel}
             />
             <Route
               exact={true}

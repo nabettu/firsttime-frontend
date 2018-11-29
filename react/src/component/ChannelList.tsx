@@ -9,6 +9,7 @@ export const ChannelList = () => {
     <Menu inverted vertical fixed={"left"}>
       <Menu.Item as={NavLink} to={"/"}>
         home
+        <Icon name="home" />
       </Menu.Item>
       <Menu.Item>
         Channels

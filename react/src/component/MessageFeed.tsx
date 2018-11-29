@@ -35,7 +35,7 @@ export class MessageFeed extends React.Component<
 
   public componentDidUpdate(prevProps: MessageFeedProps) {
     if (prevProps.channelName != this.props.channelName) {
-      this.fetchMessages(prevProps.channelName);
+      this.fetchMessages(this.props.channelName);
     }
   }
 

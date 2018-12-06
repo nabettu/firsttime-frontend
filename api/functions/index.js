@@ -100,12 +100,13 @@ app.post("/reset", (req, res) => {
 app.post("/channels/:cname/messages", (req, res) => {
   let cname = req.params.cname;
   let message = {
-    date: new Date.toJSON(),
+    date: new Date().toJSON(),
     body: req.body.body,
     user: req.user
   };
   let messageRef = admin.database().ref(`channels/${cname}/messages`);
   messageRef.push(message);
+  res.header("Content-Type", "application/json; charset=utf-8");
   res.status(201).send({ result: "ok" });
 });
 

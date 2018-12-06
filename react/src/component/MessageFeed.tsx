@@ -4,6 +4,8 @@ import { Segment, Image, Comment, Header } from "semantic-ui-react";
 
 interface MessageFeedProps {
   channelName: string;
+  shouldReload: boolean;
+  setShouldReload: (shouldReload: boolean) => void;
 }
 
 interface MessageFeedState {
@@ -34,12 +36,16 @@ export class MessageFeed extends React.Component<
   }
 
   public componentDidUpdate(prevProps: MessageFeedProps) {
-    if (prevProps.channelName != this.props.channelName) {
+    if (
+      prevProps.channelName != this.props.channelName ||
+      (!prevProps.shouldReload && this.props.shouldReload)
+    ) {
       this.fetchMessages(this.props.channelName);
     }
   }
 
   private fetchMessages = (channelName: string) => {
+    this.props.setShouldReload(false);
     fetchMessages(channelName)
       .then(responce => {
         this.setState({
@@ -62,7 +68,10 @@ export class MessageFeed extends React.Component<
             return (
               <Comment key={message.id}>
                 <Comment.Avatar
-                  src={message.user.avatar || "/img/avatar.png"}
+                  src={
+                    message.user.avatar ||
+                    "https://pbs.twimg.com/profile_images/979589819847262208/y3-HUfZq_bigger.jpg"
+                  }
                 />
                 <Comment.Content>
                   <Comment.Author as="a">{message.user.name}</Comment.Author>
